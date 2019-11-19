@@ -1,0 +1,31 @@
+name: Gradle CI (AsciiDoctor)
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build with Gradle
+        run: ./gradlew asciidoctorPdf
+      - name: Checkout origin/gh-pages
+        run: git checkout -b gh-pages origin/gh-pages && rm -rf docs
+      - name: Set Git configuration
+        run: git config user.name stuhlmeier && git config user.email stuhlmeier@gmail.com
+      - name: Commit built files
+        run: cp -r build/docs . && git add docs/asciidocPdf && (git commit -m "CI completed AsciiDoctor build @ `date`" || true)
+      - name: Push changes to origin/gh-pages
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          force: true
