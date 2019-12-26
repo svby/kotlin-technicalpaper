@@ -2,9 +2,9 @@ group = "com.github.stuhlmeier"
 version = "0.0.1"
 
 plugins {
-    id("org.asciidoctor.jvm.base") version "2.3.0"
-    id("org.asciidoctor.jvm.convert") version "2.3.0"
-    id("org.asciidoctor.jvm.pdf") version "2.3.0"
+    id("org.asciidoctor.jvm.base") version "3.0.0-alpha.4"
+    id("org.asciidoctor.jvm.convert") version "3.0.0-alpha.4"
+    id("org.asciidoctor.jvm.pdf") version "3.0.0-alpha.4"
 }
 
 repositories {
@@ -12,7 +12,7 @@ repositories {
 }
 
 asciidoctorj {
-    setOptions(mapOf("doctype" to "article"))
+    setOptions(mapOf("doctype" to "book"))
     setAttributes(mapOf(
             "source-highlighter" to "rouge",
             "toc" to "left",
@@ -21,14 +21,14 @@ asciidoctorj {
     ))
 
     modules {
-        diagram.version("1.5.18")
+        diagram.version("2.0.0")
     }
 }
 
 pdfThemes {
     local("spengergasse") {
-        styleDir = file("src/docs/themes")
-        styleName = "spengergasse"
+        themeDir = file("src/docs/themes")
+        themeName = "spengergasse"
     }
 }
 
