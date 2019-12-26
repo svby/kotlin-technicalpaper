@@ -1,0 +1,32 @@
+=== What is Kotlin?
+
+Kotlin is many things:
+
+**It is cross platform.**
+Kotlin's current compilation targets are:
+
+- JVM bytecode
+- JavaScript
+- Native binaries via LLVM:
+* iOS (arm32, arm64)
+* macOS (x86_64)
+* watchOS (x86_64, arm32, arm64)
+* tvOS (x86_64, arm64)
+* Android (x86, x86_64, arm32, arm64)
+* Windows (MinGW x86_64, x86)
+* Linux (x86_64, arm32, MIPS, RPi)
+* WebAssembly (wasm32)
+
+**It is multi-paradigm.**
+Kotlin supports a mix of functional and object-oriented programming to achieve maximum productivity.
+
+Its expansive standard library provides hundreds of utilities,
+ranging from basic helpers to entire suites of functions that,
+in order to work properly in other, less-flexible languages,
+would have had to be fully-fledged language features; the previous sentence may or may not be a not-so-subtle jab
+at C# and LINQ.
+
+**It is flexible.**
+Kotlin is a great fit for domain-specific languages (DSLs)
+and has great support for being used as an embedded scripting language --
+in fact, the Gradle buildscript used to create this document was itself written in Kotlin.

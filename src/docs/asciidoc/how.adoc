@@ -1,0 +1,72 @@
+=== How do I write Kotlin?
+
+==== Language idioms
+
+Kotlin was originally been developed as a JVM language, and has thus been considerably influenced by the Java world.
+While this means that some fragments of may be translated line-by-line into Kotlin, this often does not result in optimal Kotlin code.
+
+Take the following example:
+
+[source,java]
+----
+final var person = ...;
+
+if (person != null) {
+    final var addresses = person.getAddresses();
+    if (addresses != null && !addresses.isEmpty()) {
+        final var firstAddress = addresses.get(0);
+        if (firstAddress != null) {
+            final var street = firstAddress.getStreet();
+            if (street != null) {
+                final var streetName = street.getName();
+                if (streetName != null) {
+                    ...
+                }
+            }
+        }
+    }
+}
+----
+
+One might argue that this Java antipattern is obsolete, due to the advent of Java 8 and its
+https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Optional.html[Optional] utility class.
+Let us give this sample a more modern twist:
+
+[source,java]
+----
+final var person = ...;
+
+Optional.ofNullable(person)
+        .flatMap(Person::getAddresses)
+        .flatMap(as -> as.stream().findFirst())
+        .flatMap(Address::getStreet)
+        .flatMap(Street::getName)
+        .ifPresent(streetName -> {
+            ...
+        });
+----
+
+While this is much more concise, consider the overhead of wrapping every value that _may or may not_ have a value with an extra object that:
+
+- must be allocated on the stack (or heap)
+- incurs a runtime performance penalty for each of the chained method calls
+- results in code that is non-trivial to read
+
+Not only is this be an unnecessarily complex approach to handling
+https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/[Tony Hoare's billion-dollar mistake], there exist _core language features_ in Kotlin designed to avoid this problem entirely:
+
+[source,kotlin]
+----
+val person = ...
+
+person?.addresses?.firstOrNull()?.street?.name?.let {
+    ...
+}
+----
+
+In short: to write proper, idiomatic Kotlin, you will _need_ to ignore your instincts and find new approaches to solving problems.
+Pretending to write Kotlin when you are doing nothing more than translating the Java you _would've_ written will not result in good code.
+
+JetBrains'
+https://www.jetbrains.com/help/idea/mixing-java-and-kotlin-in-one-project.html#convert-java-to-kotlin[built-in Java-to-Kotlin converter] is often a good start; its conversions are relatively decent due to IntelliJ's static analysis capabilities.
+However, one should not rely solely on this tool -- it will often produce suboptimal (or even invalid) code.

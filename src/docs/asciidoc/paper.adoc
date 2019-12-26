@@ -3,3 +3,5 @@ Stuhlmeier
 v0.0.1
 
 include::intro.adoc[]
+
+include::howto.adoc[]
