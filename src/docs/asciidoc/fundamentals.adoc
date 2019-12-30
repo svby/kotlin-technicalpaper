@@ -8,7 +8,7 @@ Kotlin's primary advantage to developers is that it manages to be extremely expr
 ==== Files
 
 Unlike many other languages, the Kotlin compiler has the additional concept of a "file".
-Whereas all symbols in Java or C# must be contained in a _class_, Kotlin allows properties and functions to be declared at the _top level_:
+Whereas all symbols in Java or C# must either be or be contained in _classes_, Kotlin allows properties and functions to be declared at the _top level_:
 
 [source,kotlin]
 ----
@@ -18,10 +18,28 @@ val foo = "This is a top-level property"
 fun thisIsATopLevelFunction() {}
 ----
 
+Top-level symbols are placed in the current package's scope, unless they are ``private`` --
+private top-level symbols are only visible within the same file.
+They can be imported with ``[package-name].[symbol-name]``, similarly to classes:
+
+[source,kotlin]
+----
+// File A
+package a
+
+val foo = "This is a top-level property"
+
+// File B
+package b
+import a.foo
+
+fun main() = println(foo) // "This is a top-level property"
+----
+
 Kotlin files typically have the extension `.kt`.
 
 The Kotlin compiler, `kotlinc`, supports dynamic execution of _Kotlin scripts_.
-Kotlin scripts have the extension `.kts` and do not require a `main` entry point; top-level statements are allowed and executed.
+Kotlin scripts have the extension `.kts` and do not require a `main` function; top-level statements are allowed and executed.
 
 You can download ``kotlinc``'s binaries https://github.com/JetBrains/kotlin/releases/tag/v1.3.61[here].
 If you prefer package managers, you can also install it

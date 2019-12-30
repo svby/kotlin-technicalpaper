@@ -1,0 +1,150 @@
+=== Classes and objects: Data handling
+
+The basic types in Kotlin are identical to those found in Java and C#.
+
+We have:
+
+- (``abstract``) ``class``es
+- ``interface``s
+- ``enum class``es
+* Analogous to ``enum``s in Java; this construct is rare in other languages.
+- ``annotation class``es
+* Analogous to ``@interface``s in Java and ``Attribute``s in C#.
+
+Unlike Java, where interfaces have only recently gained support for default implementations, Kotlin permits this for any JVM target level using bytecode magic.
+
+In addition to these types, Kotlin introduces a new type of class called the ``object``.
+More commonly known as _singletons_, ``object``s only can have one global instance for the whole lifetime of a program --
+this behavior is identical to that of standard singletons and of ``static`` globals in C/C++.
+What makes ``object``s really stand out, however, is that they require no boilerplate code to implement and are thus free from programmer error.
+Since they are normal classes, they can implement interfaces, and their instance can be passed around like a normal value.
+
+This means that something like
+
+[source,java]
+----
+public interface Bar {
+    String baz();
+}
+
+// Typical Java singleton
+public enum Foo implements Bar {
+    INSTANCE {
+        @Override String baz() {
+            return "Hello, world!";
+        }
+    }
+}
+
+public class Program {
+    public static void doSomething(Bar bar) {
+        System.out.println(bar.baz());
+    }
+    public static void main(String[] args) {
+        doSomething(Foo.INSTANCE); // Unnecessary qualification :(
+    }
+}
+----
+
+would become
+
+[source,kotlin]
+----
+interface Bar {
+    fun baz(): String
+}
+
+object Foo : Bar {
+    override fun baz() = "Hello, world!"
+}
+
+fun doSomething(bar: Bar) {
+    println(bar.baz())
+}
+
+fun main() = doSomething(Foo) // The type name itself refers to the instance!
+----
+
+==== Kotlin and ``static``
+
+This leads us to another important point: _Kotlin does not have the concept of ``static``_.
+The optimal replacement for static utility classes is either a set of top-level functions or an `object`.
+This is mostly up to your own taste, but typically depends on whether the utility conceptually belongs _at the package level_, or if they should be further grouped according to a certain criterion.
+
+This means that something like
+
+[source,java]
+----
+public class LzmaUtils {
+    private LzmaUtils() {}
+    public static void decompressStream(InputStream input) { ... }
+}
+----
+
+would become
+
+[source,kotlin]
+----
+package myapp // These utilities may not belong at the top level
+
+object LzmaUtils {
+    fun decompressStream(input: InputStream) { ... }
+}
+----
+
+or, alternatively, simply:
+
+[source,kotlin]
+----
+package myapp.lzma // This is an appropriate package for these utilities
+
+fun decompressStream(input: InputStream) { ... }
+----
+
+While it is ultimately up to the user to decide, creating top-level symbols is usually considered more idiomatic.
+
+==== ``companion object``s
+
+What if one wants to mix static functions and instance methods within a single class?
+This is often not an indicator of good design choices -- if you can, think about making these into (private) top-level functions instead.
+
+This is possible, however, using ``companion object``s:
+
+[source,kotlin]
+----
+class Person {
+    var name = "Gagagegg" // Instance property
+
+    companion object {
+        fun createPerson(): Person = Person()
+    }
+}
+
+...
+
+Person.createPerson() // Person(name="Gagagegg")
+----
+
+A companion object is essentially an embedded ``object`` with the same name as a class:
+it is accessed using the enclosing class's name, can implement interfaces or abstract classes, and is treated as a value.
+This effectively removes the "non-object-orientedness" of static methods from the language, making it truly object-oriented.
+
+Companion objects can be used to remove the need for boilerplate code.
+The most common application of this is in logging frameworks:
+
+[source,kotlin]
+----
+abstract class LoggerCompanion {
+    val LOGGER = ...
+}
+
+class MyApplication {
+    private companion object : LoggerCompanion()
+
+    fun foo() {
+        LOGGER.log("Hello, world!")
+    }
+}
+----
+
+All properties and functions of the companion object are visible in the class's scope.

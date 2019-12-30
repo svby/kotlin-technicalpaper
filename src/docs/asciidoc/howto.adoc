@@ -1,3 +1,5 @@
 == Kotlin ABCs
 
 include::fundamentals.adoc[]
+
+include::data.adoc[]
