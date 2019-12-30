@@ -13,6 +13,83 @@ We have:
 
 Unlike Java, where interfaces have only recently gained support for default implementations, Kotlin permits this for any JVM target level using bytecode magic.
 
+==== Primary constructors
+
+Before discussing classes in Kotlin, it is important to understand how constructors work.
+There are two types of constructors in Kotlin: _primary_ and _secondary_ constructors.
+
+This is the basic structure of a class in Kotlin:
+
+[source,kotlin]
+----
+class Foo constructor(bar: String) {
+    constructor(baz: Int) { ... }
+    ...
+}
+----
+
+A constructor in Kotlin is declared with the keyword ``constructor``, followed by the list of parameters.
+
+The constructor immediately following the type name, _if present_, is called the _primary constructor_.
+Unlike a secondary constructor, a primary constructor **does not** have a body.
+Any initialization logic must be wrapped in an ``init`` block.
+The parameters of this constructor are visible for all property initializers:
+
+[source,kotlin]
+----
+class Person constructor(birthYear: Int) {
+    val age: Int
+    val birthYearMinusOne = birthYear - 1 // birthYear is in scope here!
+
+    init {
+        // Do some extra work here
+        age = 2019 - birthYear
+    }
+
+    fun foo() {
+        println(birthYear) // ERROR: construction has finished, parameters are no longer available
+    }
+}
+----
+
+Additionally, the ``constructor`` keyword may be omitted _for the primary constructor only_.
+It is only required if you wish to apply an annotation to the primary constructor:
+
+[source,kotlin]
+----
+@Component
+class MyService @Autowired constructor(...)
+----
+
+What makes the primary constructor so powerful is that **it can have properties as parameters**.
+It is no longer necessary to repeat ``this.field = field;`` for every single constructor parameter!
+
+[source,kotlin]
+----
+class Person(var name: String, private var ssn: String)
+----
+
+This is all the code necessary to create a class with two properties, their respective getters/setters, and the proper constructor!
+
+Notice that the class or constructor body (``{}``) can be omitted when it is empty; this is another useful quality-of-life feature.
+
+If a primary constructor is present, all secondary constructors are required to _chain_ to it, either directly or through another secondary constructor.
+This is useful if you wish to have a convenience constructor with different parameters that can be easily converted to the desired type:
+
+[source,kotlin]
+----
+class Timestamp(val instant: Instant) {
+    constructor(ldt: LocalDateTime)
+        : this(ldt.toInstant(ZoneOffset.UTC))
+    constructor() {
+        // ERROR: not chained to primary constructor!
+        doSomethingElse()
+    }
+}
+----
+
+==== ``object``s
+
 In addition to these types, Kotlin introduces a new type of class called the ``object``.
 More commonly known as _singletons_, ``object``s only can have one global instance for the whole lifetime of a program --
 this behavior is identical to that of standard singletons and of ``static`` globals in C/C++.
@@ -147,4 +224,42 @@ class MyApplication {
 }
 ----
 
-All properties and functions of the companion object are visible in the class's scope.
+All properties and functions of the companion object are pulled into the enclosing class's scope.
+
+==== ``data class``es
+
+Data classes are one of Kotlin's most loved features.
+If you need to store complex objects in memory and have all of the boilerplate abstracted away, they are the feature for you.
+
+Data classes:
+
+- must have a primary constructor with one or more parameters
+- must have a primary constructor with no non-property parameters
+- **should** generally be immutable
+- cannot be inherited from
+
+In most ways they behave identically to regular classes, except that __``equals``, ``toString`` and ``hashCode`` are automatically generated__!
+
+[source,kotlin]
+----
+data class Student(val name: String, val id: String, val graduation: Year)
+----
+
+This single line of code will generate a ``Student`` class with a proper implementation of all of the following:
+
+- constructors
+- ``getName``, ``getId``, ``getGraduation``
+- ``equals``, ``hashCode``, ``toString``
+- ``copy``
+
+``copy`` is automatically generated for all data classes and allows the user to construct an exact copy of the specified object, with the specified changes:
+
+[source,kotlin]
+----
+val john = Student("John", "1234", Year.of(2020))
+val jane = john.copy(name = "Jane", id = "5678")
+----
+
+Thanks to ``copy`` there is often no need for mutable data classes --
+new, modified instances can be created easily.
+Immutability comes with a large amount of benefits, including the elimination of defensive copying; data classes should generally be made immutable.
