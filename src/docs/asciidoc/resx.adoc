@@ -1,0 +1,9 @@
+== Additional resources
+
+In addition to the contents of this paper, a set of official Kotlin
+https://en.wikipedia.org/wiki/K%C5%8Dan[koans]
+can be found online at https://play.kotlinlang.org/koans/overview[play.kotlinlang.org].
+These are a set of small Kotlin examples to get you used to the language and assist the learning process.
+
+Additionally, Kotlin's https://kotlinlang.org/docs/reference[extensive reference] is an extremely helpful resource, even for veteran Kotlin developers.
+It goes into great detail about most, if not all, important parts of the language itself.

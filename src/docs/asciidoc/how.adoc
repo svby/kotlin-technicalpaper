@@ -2,7 +2,7 @@
 
 ==== Language idioms
 
-Kotlin was originally been developed as a JVM language, and has thus been considerably influenced by the Java world.
+Kotlin was originally developed as a JVM language, and has thus been considerably influenced by the Java world.
 While this means that some fragments of may be translated line-by-line into Kotlin, this often does not result in optimal Kotlin code.
 
 Take the following example:
@@ -67,6 +67,7 @@ person?.addresses?.firstOrNull()?.street?.name?.let {
 In short: to write proper, idiomatic Kotlin, you will _need_ to ignore your instincts and find new approaches to solving problems.
 Pretending to write Kotlin when you are doing nothing more than translating the Java you _would've_ written will not result in good code.
 
-JetBrains'
-https://www.jetbrains.com/help/idea/mixing-java-and-kotlin-in-one-project.html#convert-java-to-kotlin[built-in Java-to-Kotlin converter] is often a good start; its conversions are relatively decent due to IntelliJ's static analysis capabilities.
+IntelliJ's
+https://www.jetbrains.com/help/idea/mixing-java-and-kotlin-in-one-project.html#convert-java-to-kotlin[built-in Java-to-Kotlin converter]
+(kbd:[Ctrl+Alt+Shift+K]) is often a good start; its conversions are relatively decent due to the IDE's advanced static analysis capabilities.
 However, one should not rely solely on this tool -- it will often produce suboptimal (or even invalid) code.

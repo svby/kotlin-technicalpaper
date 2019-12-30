@@ -2,4 +2,6 @@
 
 include::what.adoc[]
 
+include::why.adoc[]
+
 include::how.adoc[]

@@ -16,8 +16,10 @@ asciidoctorj {
     setAttributes(mapOf(
             "source-highlighter" to "rouge",
             "toc" to "left",
+            "toclevels" to 5,
             "idprefix" to "",
-            "idseparator" to "-"
+            "idseparator" to "-",
+            "experimental" to ""
     ))
 
     modules {
