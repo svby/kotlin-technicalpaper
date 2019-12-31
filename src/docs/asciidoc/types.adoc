@@ -110,7 +110,7 @@ val text = """
 """.trimIndent()
 ----
 
-NOTE: Don't worry about using ``trimIndent`` -- https://youtrack.jetbrains.com/issue/KT-17755[this function is actually a compiler intrinsic].
+NOTE: Don't worry about performance when using ``trimIndent`` -- https://youtrack.jetbrains.com/issue/KT-17755[this function is actually a compiler intrinsic].
 
 ==== Collections
 

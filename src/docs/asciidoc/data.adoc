@@ -323,3 +323,25 @@ class Outer {
     }
 }
 ----
+
+=== Type aliases
+
+Type aliases are often used to shorten long generic type names, or to alias function types.
+
+[source,kotlin]
+----
+typealias EventHandler = (EventData, String, Any) -> Boolean
+typealias HandlerList = List<EventHandler>
+
+val handlers: HandlerList // Instead of List<(EventData, String, Any) -> Boolean>
+----
+
+Like C's ``typedef`` and C++'s ``using``, typealiases are equivalent to and interchangeable with their aliased types.
+
+[source,kotlin]
+----
+typealias Id = String
+fun retrieveId(): Id
+
+val id: String = retrieveId() // ok
+----
