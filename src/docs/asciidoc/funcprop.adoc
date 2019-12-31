@@ -19,6 +19,18 @@ fun makePurchase(amount: Int = 1) {
 }
 ----
 
+As with properties, there are two types of local variables: ``val`` (immutable) and ``var`` (mutable).
+The type of a variable can be omitted, and it will be inferred from its initializer:
+
+[source,kotlin]
+----
+fun foo() {
+    // These are equivalent:
+    val a: Int = 3
+    val a = 3
+}
+----
+
 If no return type is specified, it is inferred to be ``Unit``.
 Similarly, if a ``return`` statement is made with no value, it will implicitly return ``Unit``:
 
@@ -206,6 +218,8 @@ class FooServiceTest {
 }
 ----
 
+NOTE: Since Kotlin 1.2, local variables can also be ``lateinit``.
+
 ===== Extension properties
 
 It is also possible to define _extension properties_ that act identically to extension functions:
@@ -216,6 +230,21 @@ val Float.integerPart: Float get() = this.toInt().toFloat()
 
 print((2.6543f).integerPart) // 2.0
 ----
+
+===== Compile-time constants
+
+Kotlin supports compile-time constants similar to ``public static final``s in Java or ``static const``s in C/C++,
+which can also be used in annotations:
+
+[source,kotlin]
+----
+const val PROGRAM_NAME = "MyApp"
+
+@ProgramName(PROGRAM_NAME)
+class Foo
+----
+
+``const val``s must be initialized to a literal value. They are usually inlined into code that uses them, for performance reasons.
 
 ==== Nesting
 

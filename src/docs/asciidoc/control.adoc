@@ -2,7 +2,7 @@
 
 === ``for`` loops
 
-Kotlin only provides for loops that iterate through iterable objects.
+Kotlin only provides for loops that iterate through iterable objects; that is, any object that has an ``operator iterator`` function.
 
 [source,kotlin]
 ----
@@ -91,6 +91,7 @@ when (anObject) {
 }
 ----
 
+[#labels]
 === Nested scopes (labels)
 
 Similarly to Java, Kotlin can make use of _labels_ to return from a nested scope:

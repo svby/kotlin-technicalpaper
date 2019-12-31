@@ -292,10 +292,8 @@ class Outer {
 }
 ----
 
-====== Labels
-
 To access the outer class instance, use ``this@Outer``.
-Whereas in Java you would use ``Outer.this``, Kotlin uses _labels_ to accomplish this.
+Whereas in Java you would use ``Outer.this``, Kotlin uses <<labels,labels>> to accomplish this.
 
 [source,kotlin]
 ----
