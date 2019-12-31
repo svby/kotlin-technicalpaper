@@ -266,7 +266,7 @@ val john = Student("John", "1234", Year.of(2020))
 val jane = john.copy(name = "Jane", id = "5678")
 ----
 
-Thanks to ``copy``, there is often no to make data classes mutable --
+Thanks to ``copy``, there is often no reason to make data classes mutable --
 new, modified instances can be created easily.
 Immutability comes with a large amount of benefits, including the elimination of defensive copying; data classes should generally be made immutable.
 

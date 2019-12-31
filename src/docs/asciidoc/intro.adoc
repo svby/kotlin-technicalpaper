@@ -1,5 +1,7 @@
 == Introduction
 
+This paper is intended to provide an introduction to the syntax and features of the Kotlin language, and to provide small examples along the way to help explain how the features work.
+
 include::what.adoc[]
 
 include::why.adoc[]

@@ -549,7 +549,6 @@ val runnable = object : Runnable {
     }
 }
 ----
-footnote:[Unfortunately, rouge's syntax highlighting doesn't work properly with object literals.]
 
 However, when using SAM (single-abstract-method) interfaces that are defined in Java code, this is unnecessary, because Kotlin will automatically create helper constructors for these interfaces to allow for a nicer syntax.
 This is called _SAM conversion_:
@@ -577,6 +576,7 @@ for (item in mapped) {
     println(item.value)
 }
 ----
+footnote:[Unfortunately, rouge's syntax highlighting doesn't work properly with object literals.]
 
 While the type cannot be referred to by name, it is available to the compiler and can thus be used within the same scope.
 Since anonymous objects have no proper type, they cannot be returned from methods.

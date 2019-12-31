@@ -111,7 +111,7 @@ if (enteredInt == null) println("You did not enter an integer")
 The Elvis operator (`?:`, try turning it 90° clockwise) is frequently used as the last element in a `?.` chain to return a fallback value.
 The result of an `?:` expression returns the left operand if it is not `null`; otherwise, it returns the right operand.
 
-This is equivalent to the `??` operator in C#.
+TIP: This is equivalent to the `??` operator in C#.
 
 [source,kotlin]
 ----
@@ -281,7 +281,7 @@ return return throw return throw throw return return throw return
 
 While the compiler will warn that each of the expressions (except the last) is unreachable, this is valid code.
 
-TIP: It should be clear that code like this is meaningless and should never be written.
+TIP: It should hopefully be clear that code like this should never be written.
 
 ==== Statements and expressions
 
