@@ -13,7 +13,7 @@ We have:
 
 Unlike Java, where interfaces have only recently gained support for default implementations, Kotlin permits this for any JVM target level using bytecode magic.
 
-==== Primary constructors
+==== Primary and secondary constructors
 
 Before discussing classes in Kotlin, it is important to understand how constructors work.
 There are two types of constructors in Kotlin: _primary_ and _secondary_ constructors.
@@ -71,7 +71,7 @@ class Person(var name: String, private var ssn: String)
 
 This is all the code necessary to create a class with two properties, their respective getters/setters, and the proper constructor!
 
-Notice that the class or constructor body (``{}``) can be omitted when it is empty; this is another useful quality-of-life feature.
+TIP: Notice that the class or constructor body (``{}``) can be omitted when it is empty; this is another useful quality-of-life feature.
 
 If a primary constructor is present, all secondary constructors are required to _chain_ to it, either directly or through another secondary constructor.
 This is useful if you wish to have a convenience constructor with different parameters that can be easily converted to the desired type:
@@ -260,6 +260,10 @@ val john = Student("John", "1234", Year.of(2020))
 val jane = john.copy(name = "Jane", id = "5678")
 ----
 
-Thanks to ``copy`` there is often no need for mutable data classes --
+Thanks to ``copy``, there is often no to make data classes mutable --
 new, modified instances can be created easily.
 Immutability comes with a large amount of benefits, including the elimination of defensive copying; data classes should generally be made immutable.
+
+NOTE: It may be worth mentioning that Java is adopting this syntax in JDK 14, for its proposed
+https://openjdk.java.net/jeps/359[records] feature!
+While this is a preview feature and may not necessarily make it into the full release, this is impressive progress.

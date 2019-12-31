@@ -110,7 +110,7 @@ val maybeFoo: Foo? = retrieveMaybeFoo()
 val foo = maybeFoo!!
 ----
 
-Note that this will throw an exception if the value is indeed `null`.
+CAUTION: Note that this will throw an exception if the value is indeed `null`.
 Unless you are dealing with complex scenarios (e.g. reflection) where you can be _absolutely sure_ that a value will not be null, **never** use this operator.
 There is always a better way to solve nullability issues.
 
