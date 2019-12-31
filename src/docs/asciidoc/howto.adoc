@@ -3,3 +3,5 @@
 include::fundamentals.adoc[]
 
 include::data.adoc[]
+
+include::funcprop.adoc[]

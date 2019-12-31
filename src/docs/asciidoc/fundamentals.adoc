@@ -200,6 +200,8 @@ if (foo()) {
 }
 ----
 
+TIP: Since ``Nothing`` cannot hold a value, and ``T?`` is a union between ``T`` and ``null``, the type ``Nothing?`` can be used to hold a value that is always null.
+
 ==== Kotlin's type hierarchy
 
 image::types.png[]
@@ -296,6 +298,24 @@ if (ok = true) { // = instead of ==, this will always get executed!
     abort();
 }
 ----
+
+==== Access modifiers
+
+Kotlin has the following access modifiers:
+
+- ``public``
+- ``internal``
+- ``protected``
+- ``private``
+
+``public``, ``protected`` and ``private`` function identically to how they work in Java and C++.
+
+Unlike Java, Kotlin does not have package-private (default) access.
+It replaces this with ``internal`` access, which makes a symbol visible to all other classes _in the same module_.
+Files outside a project (i.e. in other modules) will not be able to access an ``internal`` symbol.
+
+IMPORTANT: The **default access modifier** for a symbol, when one is not specified, is ``public``!
+This means specifying ``public`` explicitly is almost always redundant.
 
 ==== Hello, world!
 
