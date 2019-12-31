@@ -449,7 +449,25 @@ fun loopList() {
 }
 ----
 
-It is advisable to generally avoid using ``return`` within a lambda unless necessary.
+This is called a non-local return, which is often seen in standard loops.
+It is important to mean that ``return`` has no meaning within a lambda and always affects the enclosing function scope.
+It is advisable to avoid using ``return`` within a lambda unless necessary.
+
+====== ``reified`` generics
+
+Inline functions can be used to provide compile-time reified generics.
+
+Since the functions are inlined, they have access to generic type data:
+
+[source,kotlin]
+----
+inline fun <reified T> checkType(any: Any): Boolean {
+    return any is T // This would not work in Java,
+                    // or in a non-inline function!
+}
+----
+
+This allows ``is``, ``as``, and ``::class`` to be safely used on generic type parameters.
 
 ==== Anonymous objects
 
