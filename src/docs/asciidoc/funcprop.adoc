@@ -88,6 +88,24 @@ joinToString(listOf("Hello", "world"), separator = "; ", truncated = " (more)")
 
 If named arguments had not been used, redundant values for all intermediate parameters would have had to have been specified.
 
+===== Extension functions
+
+It is possible to define _extension functions_ for external classes.
+Unlike C#, there is no requirement that they be placed in a "static class"; they are typically placed at the top level.
+
+[source,kotlin]
+----
+fun Float.inverse(): Float {
+    return 1 / this
+}
+
+print((3.0f).inverse()) // 0.33333334
+----
+
+Within an extension function, ``this`` refers to the receiver.
+
+NOTE: Extension functions can have nullable receivers! This is why you can call ``toString`` on a ``null`` value -- ``toString`` is a standard extension function defined as ``Any?.toString(): String``.
+
 ==== Properties
 
 Kotlin, like Swift, has no concept of _fields_.
@@ -186,6 +204,17 @@ class FooServiceTest {
         this.fooService = ...
     }
 }
+----
+
+===== Extension properties
+
+It is also possible to define _extension properties_ that act identically to extension functions:
+
+[source,kotlin]
+----
+val Float.integerPart: Float get() = this.toInt().toFloat()
+
+print((2.6543f).integerPart) // 2.0
 ----
 
 ==== Nesting
