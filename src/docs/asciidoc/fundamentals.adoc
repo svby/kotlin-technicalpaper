@@ -178,8 +178,6 @@ Callable<Unit> { foo() }
 
 This also enables function chains returning `Unit` to compose nicely.
 
-TODO samconv
-
 ==== ``Nothing``
 
 While https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing.html[Nothing] as a type is fundamentally similar to `Void`, they are extremely different in terms of usage.
