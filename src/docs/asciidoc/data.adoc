@@ -267,3 +267,54 @@ Immutability comes with a large amount of benefits, including the elimination of
 NOTE: It may be worth mentioning that Java is adopting this syntax in JDK 14, for its proposed
 https://openjdk.java.net/jeps/359[records] feature!
 While this is a preview feature and may not necessarily make it into the full release, this is impressive progress.
+
+==== Nesting
+
+===== Nested classes
+
+This is equivalent to ``static`` classes in Java;
+the class is placed in the scope of the enclosing class and can access its private members, but is otherwise unrelated to it.
+
+===== Inner classes
+
+This is equivalent to normal nested classes in Java.
+Inner classes require a reference to an instance of the outer class to be created.
+In Kotlin, an inner class is denoted by the ``inner`` keyword:
+
+[source,kotlin]
+----
+class Outer {
+    inner class Inner
+}
+----
+
+====== Labels
+
+To access the outer class instance, use ``this@Outer``.
+Whereas in Java you would use ``Outer.this``, Kotlin uses _labels_ to accomplish this.
+
+[source,kotlin]
+----
+class Outer {
+    fun foo() {
+        println("Outer")
+    }
+
+    inner class Inner {
+        fun foo() {
+            println("Inner")
+        }
+
+        fun bar() {
+            this@Outer.foo() // "Outer"
+            this.foo() // "Inner"
+        }
+    }
+
+    class Nested {
+        fun bar() {
+            this@Outer.foo() // ERROR: this is not an inner class, so it has no Outer instance!
+        }
+    }
+}
+----
