@@ -3,7 +3,8 @@
 Kotlin is fundamentally an object-oriented language.
 This, along with the constraints imposed by the JVM, means that classes and data will be structured in much the same way as in Java, C++, or any other object-oriented language.
 
-Kotlin's primary advantage to developers is that it manages to be extremely expressive while remaining fairly short.
+Kotlin's primary advantage to developers is that it manages to be extremely expressive while remaining fairly short;
+for example, Kotlin code is completely semicolon-free!
 
 ==== Files
 

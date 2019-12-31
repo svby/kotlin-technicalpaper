@@ -2,6 +2,8 @@
 
 include::fundamentals.adoc[]
 
+include::types.adoc[]
+
 include::data.adoc[]
 
 include::funcprop.adoc[]
