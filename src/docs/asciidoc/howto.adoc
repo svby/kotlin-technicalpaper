@@ -7,3 +7,5 @@ include::types.adoc[]
 include::data.adoc[]
 
 include::funcprop.adoc[]
+
+include::control.adoc[]
