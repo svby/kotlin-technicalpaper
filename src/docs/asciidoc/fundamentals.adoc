@@ -42,6 +42,8 @@ Kotlin files typically have the extension `.kt`.
 The Kotlin compiler, `kotlinc`, supports dynamic execution of _Kotlin scripts_.
 Kotlin scripts have the extension `.kts` and do not require a `main` function; top-level statements are allowed and executed.
 
+==== Getting started
+
 You can download ``kotlinc``'s binaries https://github.com/JetBrains/kotlin/releases/tag/v1.3.61[here].
 If you prefer package managers, you can also install it
 https://www.archlinux.org/packages/community/any/kotlin/[with ``pacman`` (Arch Linux)],
@@ -54,6 +56,7 @@ An easy way to play around with Kotlin is to create a `.kts` _scratch file_ (kbd
 If you want to create a full Kotlin project, you can easily do so by using JetBrains'
 https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-archetype-jvm[Kotlin Maven archetype]
 or by selecting "Kotlin/JVM" in the Gradle project creation dialog.
+This will generate a full, working Maven project for you with a sample Kotlin entry point and test class.
 
 While there exists an equivalent plugin for https://marketplace.eclipse.org/content/kotlin-plugin-eclipse[Eclipse], it unfortunately tends to be updated quite infrequently, is prone to bugs, and is usually out of date.
 

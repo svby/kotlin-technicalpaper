@@ -1,3 +1,6 @@
 === What is Kotlin?
 
 Kotlin is a programming language developed by JetBrains, the creators of the IntelliJ Java IDE.
+
+It is built on the foundations of the JVM and is highly interoperable with Java code.
+Many aspects of Kotlin (generics, arrays, etc.) therefore function almost identically to how they do in Java.
