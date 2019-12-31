@@ -345,3 +345,19 @@ fun retrieveId(): Id
 
 val id: String = retrieveId() // ok
 ----
+
+This is a good alternative to defining functional interfaces. Since Kotlin already has built-in function types, one can simply write
+
+[source,kotlin]
+----
+typealias Predicate<T> = (T) -> Boolean
+----
+
+instead of
+
+[source,kotlin]
+----
+interface Predicate<T> {
+    operator fun invoke(value: T): Boolean
+}
+----
