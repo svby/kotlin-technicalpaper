@@ -29,4 +29,4 @@ at C# and LINQ.
 **It is flexible.**
 Kotlin is a great fit for domain-specific languages (DSLs)
 and has great support for being used as an embedded scripting language --
-in fact, the Gradle buildscript used to create this document was itself written in Kotlin.
+in fact, https://gist.github.com/stuhlmeier/7e42e4dc5c1222d521824d4681eeb96d[the Gradle buildscript used to create this document was itself written in Kotlin].
