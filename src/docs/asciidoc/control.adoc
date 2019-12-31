@@ -91,6 +91,8 @@ when (anObject) {
 }
 ----
 
+NOTE: Kotlin's ``when`` isn't quite as powerful as Scala's ``match`` expression (there is no support for pattern matching), but it's a nice step up from Java.
+
 [#labels]
 === Nested scopes (labels)
 

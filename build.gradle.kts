@@ -1,5 +1,5 @@
 group = "com.github.stuhlmeier"
-version = "0.0.1"
+version = "0.1.1"
 
 plugins {
     id("org.asciidoctor.jvm.base") version "3.0.0-alpha.4"
@@ -19,7 +19,8 @@ asciidoctorj {
             "toclevels" to 5,
             "idprefix" to "",
             "idseparator" to "-",
-            "experimental" to ""
+            "experimental" to "",
+            "icons" to "font"
     ))
 
     modules {

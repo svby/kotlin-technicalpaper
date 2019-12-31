@@ -299,7 +299,7 @@ class Outer {
 ----
 
 To access the outer class instance, use ``this@Outer``.
-Whereas in Java you would use ``Outer.this``, Kotlin uses <<labels,labels>> to accomplish this.
+Whereas Java uses the ``Outer.this`` syntax, Kotlin uses <<labels,labels>>.
 
 [source,kotlin]
 ----
@@ -350,7 +350,7 @@ fun retrieveId(): Id
 val id: String = retrieveId() // ok
 ----
 
-**This is a good alternative to defining functional interfaces**. Since Kotlin already has built-in function types, one can simply write
+**This is a good alternative to defining functional interfaces**. Since Kotlin already has built-in <<functy,function types>>, one can simply write
 
 [source,kotlin]
 ----

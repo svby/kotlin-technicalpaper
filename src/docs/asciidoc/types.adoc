@@ -88,7 +88,7 @@ println("Half of foo is ${foo / 2}") // "Half of foo is 1"
 ----
 footnote:[This is somehow the context for my second-most popular StackOverflow answer: https://stackoverflow.com/a/48800990]
 
-Multi-line (raw) strings, which unfortunately didn't make it into JDK 13, can be defined using triple quotes:
+Multi-line (raw) strings, which unfortunately didn't make it into Java, can be defined using triple quotes:
 
 [source,kotlin]
 ----

@@ -179,6 +179,8 @@ Callable<Unit> { foo() }
 
 This also enables function chains returning `Unit` to compose nicely.
 
+NOTE: This particular example makes use of <<anonobj,SAM conversions>>.
+
 ==== ``Nothing``
 
 While https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing.html[Nothing] as a type is fundamentally similar to `Void`, they are extremely different in terms of usage.
@@ -222,12 +224,12 @@ TIP: Since ``Nothing`` cannot hold a value, and ``T?`` is a union between ``T`` 
 ``Any`` is Kotlin's equivalent to https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Object.html[Object] -- it is the implicit base class for all types.
 It is functionally equivalent to ``Object``, except that most of its methods have been removed:
 
-- clone
+- ``clone``
 * Implement ``Cloneable`` instead, if you _really_ need ``clone``.
-- finalize
-- wait, notify, notifyAll
+- ``finalize``
+- ``wait``, ``notify``, ``notifyAll``
 * Use of these methods has been discouraged for years -- Kotlin has simplified things by removing them outright.
-- getClass
+- ``getClass``
 * This method has been replaced by the ``::class`` operator.
 
 If you need to use any of ``Object``'s methods, you can force the compiler to make them visible by casting an object to ``Object``:
@@ -278,7 +280,8 @@ return return throw return throw throw return return throw return
 ----
 
 While the compiler will warn that each of the expressions (except the last) is unreachable, this is valid code.
-It should be obvious that code like this is nevertheless meaningless and should never be written.
+
+TIP: It should be clear that code like this is meaningless and should never be written.
 
 ==== Statements and expressions
 
@@ -308,6 +311,9 @@ println(
 
 This is incredibly versatile, since it is possible to place multiple statements within the `if` statement's block --
 every _block_ in Kotlin also returns a value!
+
+NOTE: Because ``if`` is an expression, Kotlin does not have the ``? :`` ternary operator.
+
 The result of the last statement in a block implicitly becomes the result of the block itself.
 If the last statement is not an expression, it returns `Unit` instead:
 
@@ -320,7 +326,7 @@ val value = run {
 print(value) // 42
 ----
 
-Unlike in most other C-like languages, assignments are not expressions.
+TIP: Unlike in most other C-like languages, assignments are not expressions.
 This means many classic sources of programmer error can be eliminated:
 
 [source,c]
@@ -344,7 +350,7 @@ Kotlin has the following visibility modifiers:
 - ``protected``
 - ``private``
 
-``public``, ``protected`` and ``private`` members identically to how they work in Java and C++.
+``public``, ``protected`` and ``private`` members work as they do in Java and C++.
 ``private`` _top-level symbols_ are visible everywhere in the same file.
 
 TIP: Top-level symbols cannot be ``protected``, as this would not make any sense -- they do not have anything to do with inheritance.
