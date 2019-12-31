@@ -331,7 +331,7 @@ interface Comparer<T1, T2> {
 
 To override a function or property, declare it in the subtype using the ``override`` modifier.
 
-TIP: Unlike in Java, where ``Override`` is an annotation, ``override`` is a keyword in Kotlin.
+TIP: Unlike in Java, where ``@Override`` is an annotation, ``override`` is a keyword in Kotlin.
 
 To override a member and prevent further overriding, declare it as ``final``, like in C++:
 

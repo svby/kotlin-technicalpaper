@@ -7,9 +7,13 @@ We have:
 - (``abstract``) ``class``es
 - ``interface``s
 - ``enum class``es
-* Analogous to ``enum``s in Java; this construct is rare in other languages.
+* Identical to ``enum``s in Java; this construct is rare in other languages.
 - ``annotation class``es
 * Analogous to ``@interface``s in Java and ``Attribute``s in C#.
+- ``inner class``es
+- ``sealed class``es
+* A class with restricted inheritance. Only classes defined in the same file may inherit from it.
+* This is often used for _enum types_ (variant types, _not object enums_) similar to Rust's ``enum`` and C++'s ``std::variant``.
 
 Unlike Java, where interfaces have only recently gained support for default implementations, Kotlin permits this for any JVM target level using bytecode magic.
 
@@ -225,6 +229,8 @@ class MyApplication {
 ----
 
 All properties and functions of the companion object are pulled into the enclosing class's scope.
+
+NOTE: Companion objects are compiled to a static singleton field, and are accessible as such from Java code. If you want companion object functions to be compiled to real static methods, annotate them with ``@JvmStatic``.
 
 ==== ``data class``es
 
