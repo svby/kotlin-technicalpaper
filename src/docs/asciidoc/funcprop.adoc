@@ -31,6 +31,39 @@ fun foo() { // Equivalent to fun foo(): Unit
 
 If no return statement is present in the body of a function, and the function is specified to return ``Unit``, it is implicitly returned.
 
+If a function's body consists of a single expression, you can make use of a special, shorter syntax:
+
+[source,kotlin]
+----
+override fun toString() = "..."
+----
+
+Single-expression functions can have their return types omitted; they will be inferred from the expression.
+
+===== Variadic arguments
+
+A parameter can accept an arbitrary number of arguments if it is annotated by ``varargs``:
+
+[source,kotlin]
+----
+fun takeLotsOfStrings(vararg strings: String) {
+    for (string in strings) println(string)
+}
+----
+
+Within the function, ``varargs`` parameters are treated as arrays and can be used as such.
+
+To pass the contents of an array to a ``varargs`` parameter, you can use the _spread operator_ ``*``:
+
+[source,kotlin]
+----
+val strings = arrayOf("Hello", "world")
+// The spread operator can even interleave varargs parameters!
+takeLotsOfStrings("Something", *strings, "else")
+----
+
+CAUTION: No more than one parameter per function can be ``varargs``.
+
 ===== Named arguments
 
 When invoking a function, parameters can be referred to by name.
@@ -120,23 +153,6 @@ val foo = 3
 Within the body of a field-backed property's getter or setter, a **magic variable** called ``field`` is accessible.
 This is a mutable reference to the property's backing field, and can be used to easily add additional logic to a property setter.
 
-===== ``lateinit`` properties
-
-The ``lateinit`` modifier allows a property or local variable of a non-nullable type to initially have no value.
-This is especially useful for classes that do not have their fields initialized at construction time; Android activities, test fixtures, or Spring services are common examples.
-
-[source,kotlin]
-----
-class FooServiceTest {
-    lateinit var fooService: FooService
-
-    @BeforeClass
-    fun init() {
-        this.fooService = ...
-    }
-}
-----
-
 Without ``lateinit``, the property would have to be declared as nullable because its initial value is ``null``; every operation on it would either have to make use of the ``!!`` operator or use unnecessary ``?.`` chaining.
 
 [source,kotlin]
@@ -153,6 +169,24 @@ This is useful for creating e.g. "compound properties" (like the aforementioned 
 
 TIP: Properties with no backing field
 https://kotlinlang.org/docs/reference/inline-functions.html#inline-properties[can be declared as ``inline``]; no getters or setters will be generated, as they will be inlined into the calling code.
+
+===== ``lateinit`` properties
+
+The ``lateinit`` modifier allows a property or local variable of a non-nullable type to initially have no value.
+This is especially useful for classes that do not have their fields initialized at construction time; Android activities, test fixtures, or Spring services are common examples.
+
+[source,kotlin]
+----
+@Test
+class FooServiceTest {
+    lateinit var fooService: FooService
+
+    @BeforeClass
+    fun init() {
+        this.fooService = ...
+    }
+}
+----
 
 ==== Nesting
 
