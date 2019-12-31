@@ -278,7 +278,7 @@ the class is placed in the scope of the enclosing class and can access its priva
 ===== Inner classes
 
 This is equivalent to normal nested classes in Java.
-Inner classes require a reference to an instance of the outer class to be created.
+Inner classes hold a reference to an instance of the outer class.
 In Kotlin, an inner class is denoted by the ``inner`` keyword:
 
 [source,kotlin]
@@ -313,7 +313,8 @@ class Outer {
 
     class Nested {
         fun bar() {
-            this@Outer.foo() // ERROR: this is not an inner class, so it has no Outer instance!
+            this@Outer.foo() // ERROR: this is not an inner class,
+                             // so it has no Outer instance!
         }
     }
 }

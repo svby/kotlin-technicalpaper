@@ -120,6 +120,25 @@ val foo = 3
 Within the body of a field-backed property's getter or setter, a **magic variable** called ``field`` is accessible.
 This is a mutable reference to the property's backing field, and can be used to easily add additional logic to a property setter.
 
+===== ``lateinit`` properties
+
+The ``lateinit`` modifier allows a property or local variable of a non-nullable type to initially have no value.
+This is especially useful for classes that do not have their fields initialized at construction time; Android activities, test fixtures, or Spring services are common examples.
+
+[source,kotlin]
+----
+class FooServiceTest {
+    lateinit var fooService: FooService
+
+    @BeforeClass
+    fun init() {
+        this.fooService = ...
+    }
+}
+----
+
+Without ``lateinit``, the property would have to be declared as nullable because its initial value is ``null``; every operation on it would either have to make use of the ``!!`` operator or use unnecessary ``?.`` chaining.
+
 [source,kotlin]
 ----
 var positiveInt: Int = 1
@@ -204,7 +223,8 @@ This ensures that the superclass constructor has finished by the time the subcla
 ==== ``abstract`` and ``override``
 
 Functions and properties can also be ``abstract`` members of abstract classes and interfaces.
-Interface functions are implicitly ``abstract``. Default implementations for interface functions are easy to specify -- just give the function a body:
+Interface functions are implicitly ``abstract``.
+Default implementations for interface functions are easy to specify -- just give the function a body:
 
 [source,kotlin]
 ----
@@ -239,6 +259,9 @@ class C : B {
     override val bar get() = "Quux" // ok
 }
 ----
+
+TIP: ``override`` can even be used on primary constructor property parameters!
+This is especially useful for use with data classes.
 
 ==== Explicit ``super``
 
