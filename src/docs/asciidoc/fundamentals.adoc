@@ -335,16 +335,19 @@ if (ok = true) { // = instead of ==, this will always get executed!
 }
 ----
 
-==== Access modifiers
+==== Visibility modifiers
 
-Kotlin has the following access modifiers:
+Kotlin has the following visibility modifiers:
 
 - ``public``
 - ``internal``
 - ``protected``
 - ``private``
 
-``public``, ``protected`` and ``private`` function identically to how they work in Java and C++.
+``public``, ``protected`` and ``private`` members identically to how they work in Java and C++.
+``private`` _top-level symbols_ are visible everywhere in the same file.
+
+TIP: Top-level symbols cannot be ``protected``, as this would not make any sense -- they do not have anything to do with inheritance.
 
 Unlike Java, Kotlin does not have package-private (default) access.
 It replaces this with ``internal`` access, which makes a symbol visible to all other classes _in the same module_.

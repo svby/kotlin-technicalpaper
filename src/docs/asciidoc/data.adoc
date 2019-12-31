@@ -270,6 +270,10 @@ While this is a preview feature and may not necessarily make it into the full re
 
 ==== Nesting
 
+Classes can be nested in Kotlin.
+
+CAUTION: Unlike in Java, to comply with scope rules, outer classes cannot access private members of inner classes!
+
 ===== Nested classes
 
 This is equivalent to ``static`` classes in Java;

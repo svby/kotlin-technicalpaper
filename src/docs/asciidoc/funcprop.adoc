@@ -254,6 +254,8 @@ class Derived : Base {
 
 This ensures that the superclass constructor has finished by the time the subclass's initializers run.
 
+TIP: Interfaces cannot be initialized in the class header because they do not have constructors.
+
 ==== ``abstract`` and ``override``
 
 Functions and properties can also be ``abstract`` members of abstract classes and interfaces.
