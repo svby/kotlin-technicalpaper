@@ -133,8 +133,6 @@ CAUTION: Note that this will throw an exception if the value is indeed `null`.
 Unless you are dealing with complex scenarios (e.g. reflection) where you can be _absolutely sure_ that a value will not be null, **never** use this operator.
 There is always a better way to solve nullability issues.
 
-TODO nullableutil
-
 ==== ``Unit``
 
 Kotlin, like many functional languages, does not have the concept of "no return type"; every function must return a value.

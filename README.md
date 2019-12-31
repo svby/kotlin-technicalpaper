@@ -1,6 +1,6 @@
 # kotlin-technicalpaper
 
-TODO
+Introductory Kotlin paper, written for 5EHIF POS class.
 
 ## Contents
 

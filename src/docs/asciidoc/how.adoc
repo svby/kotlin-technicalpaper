@@ -69,5 +69,6 @@ Pretending to write Kotlin when you are doing nothing more than translating the 
 
 IntelliJ's
 https://www.jetbrains.com/help/idea/mixing-java-and-kotlin-in-one-project.html#convert-java-to-kotlin[built-in Java-to-Kotlin converter]
-(kbd:[Ctrl+Alt+Shift+K]) is often a good start; its conversions are relatively decent due to the IDE's advanced static analysis capabilities.
-However, one should not rely solely on this tool -- it will often produce suboptimal (or even invalid) code.
+(kbd:[Ctrl+Alt+Shift+K]) is often a great start; its conversions are relatively decent due to the IDE's advanced static analysis capabilities.
+This is an invaluable tool for learning the language; it will recognize common patterns and translate them into Kotlin appropriately.
+Of course, one should not rely solely on this tool -- it will sometimes produce suboptimal (or even invalid) code.

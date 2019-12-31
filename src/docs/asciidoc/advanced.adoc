@@ -9,6 +9,8 @@ The following is a list of incredibly useful language features and links to thei
 Often, searching for an implementation of a complex utility function will reveal that it already exists in the ``stdlib``.
 - Reflection
 * Kotlin has its own advanced reflection system -- however, its complexities and gotchas are too great to discuss in an introductory paper.
+- Collections
+* Kotlin has an extensive amount of collection types and a large support library providing operations like ``map``, ``filter``, and ``fold`` as extension functions.
 - https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html[Coroutines] (``suspend`` functions)
 * Enables safe, structured, asynchronous programming without much need for synchronization
 - https://kotlinlang.org/docs/reference/native/faq.html[Kotlin/Native]
