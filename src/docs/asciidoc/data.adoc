@@ -53,12 +53,12 @@ class Person constructor(birthYear: Int) {
 ----
 
 Additionally, the ``constructor`` keyword may be omitted _for the primary constructor only_.
-It is only required if you wish to apply an annotation to the primary constructor:
+It is only required if you wish to apply an access modifier or annotation to the primary constructor:
 
 [source,kotlin]
 ----
 @Component
-class MyService @Autowired constructor(...)
+class MyService @Autowired internal constructor(...)
 ----
 
 What makes the primary constructor so powerful is that **it can have properties as parameters**.

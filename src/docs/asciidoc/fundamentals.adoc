@@ -56,7 +56,22 @@ or by selecting "Kotlin/JVM" in the Gradle project creation dialog.
 
 While there exists an equivalent plugin for https://marketplace.eclipse.org/content/kotlin-plugin-eclipse[Eclipse], it unfortunately tends to be updated quite infrequently, is prone to bugs, and is usually out of date.
 
-==== `?`
+==== ``new``
+
+Kotlin does not have a ``new`` operator. Constructors are called using standard function-call syntax:
+
+[source,kotlin]
+----
+val person = Person("Test", "Testerson")
+----
+
+NOTE: This is a nice time-saver, and is consistent with C++ syntax --
+``new`` is used to allocate dynamic memory, call a constructor, and return a pointer;
+or to otherwise create the object on the stack and return an rvalue.
+As there is no real functional distinction between heap- and stack-allocated values on the JVM, since one generally does not have to deal with pointers,
+there is no reason to keep the keyword.
+
+==== ``?``
 
 `?` is an integral part of Kotlin's type system; `?` designates a type as _nullable_:
 
@@ -116,7 +131,7 @@ There is always a better way to solve nullability issues.
 
 TODO nullableutil
 
-==== `Unit`
+==== ``Unit``
 
 Kotlin, like many functional languages, does not have the concept of "no return type"; every function must return a value.
 So how do we deal with `void` methods?
@@ -164,7 +179,7 @@ This also enables function chains returning `Unit` to compose nicely.
 
 TODO samconv
 
-==== `Nothing`
+==== ``Nothing``
 
 While https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing.html[Nothing] as a type is fundamentally similar to `Void`, they are extremely different in terms of usage.
 
@@ -201,6 +216,27 @@ if (foo()) {
 ----
 
 TIP: Since ``Nothing`` cannot hold a value, and ``T?`` is a union between ``T`` and ``null``, the type ``Nothing?`` can be used to hold a value that is always null.
+
+==== ``Any``
+
+``Any`` is Kotlin's equivalent to https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Object.html[Object] -- it is the implicit base class for all types.
+It is functionally equivalent to ``Object``, except that most of its methods have been removed:
+
+- clone
+* Implement ``Cloneable`` instead, if you _really_ need ``clone``.
+- finalize
+- wait, notify, notifyAll
+* Use of these methods has been discouraged for years -- Kotlin has simplified things by removing them outright.
+- getClass
+* This method has been replaced by the ``::class`` operator.
+
+If you need to use any of ``Object``'s methods, you can force the compiler to make them visible by casting an object to ``Object``:
+
+[source,kotlin]
+----
+val foo = ...
+(foo as java.lang.Object).notify()
+----
 
 ==== Kotlin's type hierarchy
 
