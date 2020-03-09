@@ -2,6 +2,9 @@
 
 ==== "Primitives"
 
+TIP: Everything in Kotlin is a class!
+There are no primitive types; the compiler will automatically deal with boxing/unboxing for you, making working with generics a breeze.
+
 Kotlin provides Java's eight primitive types as built-in classes:
 
 - ``kotlin.Byte`` -- 8-bit signed integer
@@ -41,9 +44,6 @@ val eFloat = 2.7182818284f // Float
 ----
 
 footnote:[https://kotlinlang.org/docs/reference/basic-types.html]
-
-TIP: Everything in Kotlin is a class!
-There are no primitive types; the compiler will automatically deal with boxing/unboxing for you, making working with generics a breeze.
 
 Values of the built-in types cannot be converted between each other implicitly, since in other languages this is a common cause of error or loss of precision.
 To do so one must use the built-in ``toXXX`` functions:
@@ -85,10 +85,11 @@ String templates (also known as string interpolation) are the recommended way to
 val foo = 3
 println("The value of foo is $foo") // "The value of foo is 3"
 println("Half of foo is ${foo / 2}") // "Half of foo is 1"
+println("Half of foo is ${foo.toDouble() / 2}") // "Half of foo is 1.5"
 ----
 footnote:[This is somehow the context for my second-most popular StackOverflow answer: https://stackoverflow.com/a/48800990]
 
-Multi-line (raw) strings, which unfortunately didn't make it into Java, can be defined using triple quotes:
+Multi-line (raw) strings, which have only recently found their way into Java with the publication of https://openjdk.java.net/jeps/368[JEP 368], can be defined using triple quotes:
 
 [source,kotlin]
 ----
@@ -138,4 +139,4 @@ val set = setOf(1, 2, 3, 2) // {1, 2, 3}
 ----
 
 TIP: The syntax ``"key" to "value"`` makes use of the infix function ``to``, which takes two values and constructs a ``Pair`` from them.
-You could also have written ``hashMapOf(Pair("key", "value"), Pair("hello", "world"))``, but it wouldn't have been as readable.
+You could also write ``hashMapOf(Pair("key", "value"), Pair("hello", "world"))``, but it would be less readable.

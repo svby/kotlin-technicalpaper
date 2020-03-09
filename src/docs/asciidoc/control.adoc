@@ -69,7 +69,7 @@ These loop types function as they do in C.
 === ``when``
 
 ``when`` is Kotlin's replacement for the switch statement.
-It is much more powerful and does not suffer from accidental fall-through; in fact, fall-through is impossible!
+It is much more powerful and does not suffer from accidental fall-through; in fact, **fall-through is impossible**!
 
 You can match values of any type, check the type of a value, or check if it is contained in a collection (the ``in`` operator):
 

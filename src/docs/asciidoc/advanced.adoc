@@ -5,7 +5,7 @@ As this paper is primarily an introduction to the Kotlin language itself, it doe
 The following is a list of incredibly useful language features and links to their references.
 
 - The standard library
-* Kotlin has an immense standard library, which is best learned through experience.
+* Kotlin has a massive standard library, which is best learned through experience.
 Often, searching for an implementation of a complex utility function will reveal that it already exists in the ``stdlib``.
 - https://kotlinlang.org/docs/reference/reflection.html[Reflection]
 * Kotlin has its own advanced reflection system -- however, its complexities and gotchas are too great to discuss in an introductory paper.

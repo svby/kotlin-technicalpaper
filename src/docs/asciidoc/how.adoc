@@ -3,7 +3,7 @@
 ==== Language idioms
 
 Kotlin was originally developed as a JVM language, and has thus been considerably influenced by the Java world.
-While this means that some fragments of may be translated line-by-line into Kotlin, this often does not result in optimal Kotlin code.
+While this means that some fragments of code may be translated line-by-line into Kotlin, this often does not result in optimal code.
 
 Take the following example:
 
@@ -71,4 +71,4 @@ IntelliJ's
 https://www.jetbrains.com/help/idea/mixing-java-and-kotlin-in-one-project.html#convert-java-to-kotlin[built-in Java-to-Kotlin converter]
 (kbd:[Ctrl+Alt+Shift+K]) is often a great start; its conversions are relatively decent due to the IDE's advanced static analysis capabilities.
 This is an invaluable tool for learning the language; it will recognize common patterns and translate them into Kotlin appropriately.
-Of course, one should not rely solely on this tool -- it will sometimes produce suboptimal (or even invalid) code.
+Of course, one should not rely solely on this tool -- it will sometimes produce suboptimal (or even invalid) code, though it is constantly being improved.

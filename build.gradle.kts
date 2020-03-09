@@ -1,5 +1,5 @@
 group = "com.github.stuhlmeier"
-version = "0.1.1"
+version = "0.2.0"
 
 plugins {
     id("org.asciidoctor.jvm.base") version "3.0.0-alpha.4"

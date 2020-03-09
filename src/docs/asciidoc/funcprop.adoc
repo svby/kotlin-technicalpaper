@@ -76,12 +76,13 @@ val strings = arrayOf("Hello", "world")
 takeLotsOfStrings("Something", *strings, "else")
 ----
 
-CAUTION: No more than one parameter per function can be ``varargs``.
+CAUTION: No more than one parameter per function can be ``varargs``. If a parameter is ``varargs``, it is not required to be the last parameter. Values for the following parameters can be passed using <<named,named arguments>>, or in the case of a lambda parameter, it may be <<lambda,passed outside the function call parentheses>>.
 
+[#named]
 ===== Named arguments
 
 When invoking a function, parameters can be referred to by name.
-This is helpful when invoking a function with multiple default parameter values:
+This is helpful when invoking a function with **multiple default parameter values**:
 
 [source,kotlin]
 ----
@@ -153,6 +154,9 @@ Getters and setters may also have bodies, as in C#:
 
 [source,kotlin]
 ----
+var first = "Name"
+var last = "Nameington"
+
 var fullName: String
     get() {
         return "$first $last"
@@ -164,7 +168,7 @@ var fullName: String
     }
 ----
 
-If the body of a getter or setter contains a single expression, the braces may be omitted similarly to functions:
+If the body of a getter or setter contains a single expression, the braces may be omitted, similarly to functions:
 
 [source,kotlin]
 ----
@@ -417,18 +421,19 @@ Kotlin lambdas are entirely contained within ``{}``; like in Swift, the paramete
 {
     arg1, ... ->
     [lambda body]
-    [last statement]
+    [last expression, or implicit Unit]
 }
 ----
 
 footnote:[This is largely paraphrased from my StackOverflow answer https://stackoverflow.com/a/45861598/7366707[here].]
 
-The value of the last expression of a lambda is implicitly returned.
+The value of the last expression of a lambda is implicitly returned, unless the return type of the lambda is ``Unit``, in which case ``Unit`` is always returned.
 
 NOTE: If a lambda has only one parameter, the parameter list can be left out; the parameter receives the special name ``it``.
 
 CAUTION: Avoid using implicit parameter names with nested lambdas -- it quickly becomes unclear just _which_ ``it`` is being referred to.
 
+[#lambda]
 ===== Lambdas as function parameters
 
 Lambdas can be passed to functions as parameters.
@@ -576,7 +581,6 @@ for (item in mapped) {
     println(item.value)
 }
 ----
-footnote:[Unfortunately, rouge's syntax highlighting doesn't work properly with object literals.]
 
 While the type cannot be referred to by name, it is available to the compiler and can thus be used within the same scope.
 Since anonymous objects have no proper type, they cannot be returned from methods.

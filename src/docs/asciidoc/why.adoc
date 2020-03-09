@@ -23,7 +23,8 @@ Kotlin supports a mix of functional and object-oriented programming to achieve m
 Its expansive standard library provides hundreds of utilities,
 ranging from basic helpers to entire suites of functions that,
 in order to work properly in other, less-flexible languages,
-would have had to be fully-fledged language features; the previous sentence may or may not be a not-so-subtle jab
+would have had to be fully-fledged language features.
+The previous sentence may or may not be a not-so-subtle jab
 at C# and LINQ.
 
 **It is flexible.**

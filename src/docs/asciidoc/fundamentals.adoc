@@ -40,7 +40,9 @@ fun main() = println(foo) // "This is a top-level property"
 Kotlin files typically have the extension `.kt`.
 
 The Kotlin compiler, `kotlinc`, supports dynamic execution of _Kotlin scripts_.
-Kotlin scripts have the extension `.kts` and do not require a `main` function; top-level statements are allowed and executed.
+Kotlin scripts have the extension `.kts` and do not require a `main` function; all statements found at the top level are executed sequentially.
+
+CAUTION: If you _do_ use a `main` function in a Kotlin script, nothing will happen when it is executed. This is because you are essentially https://stackoverflow.com/questions/52541636/kotlin-scratch-file-output-is-missing-in-android-studio/52542248#52542248[defining a function that is never called], since `main` no longer has any special meaning.
 
 ==== Getting started
 
@@ -69,11 +71,15 @@ Kotlin does not have a ``new`` operator. Constructors are called using standard 
 val person = Person("Test", "Testerson")
 ----
 
-NOTE: This is a nice time-saver, and is consistent with C++ syntax --
-``new`` is used to allocate dynamic memory, call a constructor, and return a pointer;
-or to otherwise create the object on the stack and return an rvalue.
+[NOTE]
+====
+This is a nice time-saver, and is consistent with C++ syntax, where the keyword originates.
+
+In C++, ``new`` is used to allocate dynamic memory, call a constructor, and return a pointer,
+or to otherwise create the object on the stack and return an rvalue (more specifically, a https://en.cppreference.com/w/cpp/language/value_category#prvalue[prvalue]), which is essentially a value that may be appear on the **r**ight-hand side of an expression.
 As there is no real functional distinction between heap- and stack-allocated values on the JVM, since one generally does not have to deal with pointers,
 there is no reason to keep the keyword.
+====
 
 ==== ``?``
 
@@ -89,6 +95,13 @@ val foo2: String? = null  // ok
 
 Non-nullable types cannot have the value `null` assigned to them!
 This is one of Kotlin's advantages -- it is extremely difficult to write proper Kotlin code that throws a `NullPointerException`.
+
+[TIP]
+====
+Unlike reference/value wrapper types (_cf._ Java's `Optional` and C#'s `Nullable`), Kotlin's nullable values are a real part of the type system and play well with other language features such as generics. This means that using nullable values has no overhead; `T?` and `T` both get compiled to a simple nullable `T` in bytecode.
+
+Under the hood, **non-nullability** is ensured by inserting null-check assertions into methods, constructors, and properties. The compiler will even add the appropriate `@Nullable`/`@NotNull` annotations. This means that no calling code can ever violate these preconditions, which allows a Kotlin library to be safely consumed from other Java/JavaScript/native modules.
+====
 
 Nullable types come with
 https://kotlinlang.org/docs/reference/null-safety.html[their own useful utilities].
@@ -131,7 +144,7 @@ val foo = maybeFoo!!
 
 CAUTION: Note that this will throw an exception if the value is indeed `null`.
 Unless you are dealing with complex scenarios (e.g. reflection) where you can be _absolutely sure_ that a value will not be null, **never** use this operator.
-There is always a better way to solve nullability issues.
+There is always a better way to solve nullability issues, such as using the aforementioned safe call and Elvis operators, combined with <<retret,``return`` or ``throw`` expressions>>.
 
 ==== ``Unit``
 
@@ -257,6 +270,7 @@ The only expressions in Kotlin that return `Nothing` are:
 - `continue`
 - `break`
 
+[#retret]
 Yes, `return` returns a value!
 This allows us to extremely easily handle precondition failures, and is a very common Kotlin idiom:
 
